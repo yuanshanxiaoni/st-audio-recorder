@@ -51,7 +51,6 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
   leftBuffer: Float32Array | null = null;
   rightBuffer: Float32Array | null = null;
   recordingLength: number = 0;
-  tested: boolean = false;
 
   //get mic stream
   getStream = (): Promise<MediaStream> => {
@@ -128,7 +127,6 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
       );
       this.sampleRate = input_sample_rate;
     }
-    console.log(`Sample rate ${this.sampleRate}Hz`);
 
     // create buffer states counts
     let bufferSize = 2048;
@@ -171,19 +169,6 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
       // Do something with the data, i.e Convert this to WAV
       let left = e.inputBuffer.getChannelData(0);
       let right = e.inputBuffer.getChannelData(1);
-      if (!self.tested) {
-        self.tested = true;
-        // if this reduces to 0 we are not getting any sound
-        if (!left.reduce((a: number, b: number) => a + b)) {
-          console.log("Error: There seems to be an issue with your Mic");
-          // clean up;
-          self.stop();
-          self.stream!.getTracks().forEach(function (track: any) {
-            track.stop();
-          });
-          self.context.close();
-        }
-      }
       // Check energy level
       let energy = Math.sqrt(
         left.map((x: number) => x * x).reduce((a: number, b: number) => a + b) / left.length
@@ -212,6 +197,7 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
   };
 
   start = async () => {
+    console.log("started");
     this.recording = true;
     this.setState({
       color: this.props.args["recording_color"]
@@ -223,12 +209,12 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
   };
 
   stop = async () => {
+    console.log("stopped");
     this.recording = false;
     this.setState({
       color: this.props.args["neutral_color"]
     })
     this.closeMic();
-    console.log(this.recordingLength);
 
     // we flat the left and right channels down
     this.leftBuffer = this.mergeBuffers(this.leftchannel, this.recordingLength);

@@ -6,7 +6,7 @@ This streamlit component allows to register an audio utterence from a user.
 
 ## Installation
 
-`pip install audio-recorder-streamlit`
+`pip install audio-recorder-streamlit-auto`
 
 ## Usage
 
