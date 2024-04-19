@@ -6,9 +6,5 @@ build
 *.egg-info
 .tox
 **/__pycache__
-<<<<<<< HEAD
-*.code-workspace
-=======
 *.code-workspace
 *.lock
->>>>>>> b19df8973d3e7d5ee05341675447764498ba80c7
