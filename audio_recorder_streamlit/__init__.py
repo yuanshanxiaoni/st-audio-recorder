@@ -29,6 +29,8 @@ def audio_recorder(
     icon_size: str = "3x",
     sample_rate: Optional[int] = None,
     key: Optional[str] = None,
+    auto_start: bool = False,
+    invisible: bool = False
 ) -> Optional[bytes]:
     """Create a new instance of "audio_recorder".
 
@@ -87,6 +89,8 @@ def audio_recorder(
         sample_rate=sample_rate,
         key=key,
         default=None,
+        auto_start=auto_start,
+        invisible=invisible
     )
     audio_bytes = bytes(json.loads(data)) if data else None
     return audio_bytes

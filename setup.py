@@ -6,14 +6,14 @@ this_directory = Path(__file__).parent
 long_description = (this_directory / "README.md").read_text()
 
 setuptools.setup(
-    name="audio-recorder-streamlit",
-    version="0.0.8",
-    author="Johan Leduc",
-    author_email="johan.leduc90@gmail.com",
+    name="audio-recorder-streamlit-auto",
+    version="0.0.1",
+    author="Kevin Beck",
+    author_email="misterkevinski@gmail.com",
     description="",
     long_description=long_description,
     long_description_content_type="text/markdown",
-    url="https://github.com/Joooohan/audio-recorder-streamlit",
+    url="https://github.com/misterkevinski/audio-recorder-streamlit",
     packages=setuptools.find_packages(),
     include_package_data=True,
     classifiers=[],
