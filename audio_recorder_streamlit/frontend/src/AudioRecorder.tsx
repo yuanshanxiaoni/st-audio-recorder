@@ -58,6 +58,13 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     return navigator.mediaDevices.getUserMedia({ audio: true, video: false });
   };
 
+  componentDidMount = async() => {
+    // Automatically trigger the onClicked function on component mount
+    if(this.props.args["auto_start"]) {
+      await this.start();
+    }
+  }
+
   setupMic = async () => {
     try {
       window.stream = this.stream = await this.getStream();
@@ -280,26 +287,30 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
   };
 
   public render = (): ReactNode => {
-    const { theme } = this.props
-    const text = this.props.args["text"]
+    if(!this.props.args["invisible"]) {
+      const { theme } = this.props
+      const text = this.props.args["text"]
 
-    if (theme) {
-      // Maintain compatibility with older versions of Streamlit that don't send
-      // a theme object.
+      if (theme) {
+        // Maintain compatibility with older versions of Streamlit that don't send
+        // a theme object.
+      }
+
+      return (
+        <span>
+          {text} &nbsp;
+          <FontAwesomeIcon
+          // @ts-ignore
+          icon={this.props.args["icon_name"]}
+          onClick={this.onClicked}
+          style={{color:this.state.color}}
+          size={this.props.args["icon_size"]}
+          />
+        </span>
+      )
+    } else {
+      return "";
     }
-
-    return (
-      <span>
-        {text} &nbsp;
-        <FontAwesomeIcon
-        // @ts-ignore
-        icon={this.props.args["icon_name"]}
-        onClick={this.onClicked}
-        style={{color:this.state.color}}
-        size={this.props.args["icon_size"]}
-        />
-      </span>
-    )
   }
 
   private onClicked = async () => {
