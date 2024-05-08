@@ -1,5 +1,49 @@
 [build-system]
-requires = ["setuptools>=40.8.0", "wheel"]
+requires = ["setuptools", "setuptools-scm"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+packages = ["audio_recorder_streamlit"]
+
+[project]
+name = "audio-recorder-streamlit"
+version = "0.0.9"
+authors = [
+    {name = "Johan Leduc", email = "johan.leduc90@gmail.com"},
+]
+description = ""
+readme = "README.md"
+dependencies = [
+    "streamlit >= 0.63",
+]
+requires-python = ">=3.8"
+keywords = ["streamlit", "audio", "input"]
+classifiers = [
+  "Programming Language :: Python"
+]
+
+[project.urls]
+Source = "https://github.com/Joooohan/audio-recorder-streamlit"
+
+[tool.pdm]
+distribution = true
+
+[tool.pdm.scripts]
+_.env_file = ".env"
+build = "python setup.py sdist bdist_wheel"
+deploy-test = "twine upload --repository testpypi dist/*"
+deploy = "twine upload dist/*"
+
+[tool.pdm.dev-dependencies]
+dev = [
+    "watchdog>=4.0.0",
+    "setuptools>=69.5.1",
+    "wheel>=0.43.0",
+    "twine>=5.0.0",
+    "flake8>=5.0.4",
+    "black>=24.4.2",
+    "isort>=5.13.2",
+]
 
 [tool.black]
 line-length = 79

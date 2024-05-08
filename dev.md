@@ -22,6 +22,6 @@ npm run build
 - Update the package version.
 - Update the changelog.
 - Remove presious distributions `rm -rf dist build *.egg-info`
-- Build package distribution `tox -e build`
-- Test deployment with `tox -e deploy-test`
-- Deploy package with `tox -e deploy`.
+- Build package distribution `pdm build`
+- Test deployment with `pdm deploy-test`
+- Deploy package with `pdm deploy`.

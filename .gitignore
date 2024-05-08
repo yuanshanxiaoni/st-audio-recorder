@@ -9,3 +9,4 @@ build
 *.code-workspace
 *.lock
 .env
+.pdm-python
