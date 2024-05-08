@@ -32,7 +32,7 @@ You can adjust the recording parameters `energy_threshold` and
     automatically stop the recording.
 - `sample_rate`: Sample rate of the recorded audio. If not provided, this will use the
     default sample rate (https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext).
-
+- `auto_start`: If `True` starts the recording as soon as the component has loaded.
 
 ```python
 # The recording will stop automatically
@@ -49,6 +49,7 @@ You can adjust the button style parameters:
 - **Color**: specify the neutral color and recording color.
 - **Size**: specify the icon size using font awesome sizing
   (https://fontawesome.com/docs/web/style/size).
+- **Invisible**: If `True` the component is invisible.
 
 ```python
 audio_bytes = audio_recorder(

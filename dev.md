@@ -20,6 +20,7 @@ npm run build
 
 - Change `_RELEASE` to `True` in `audio_recorder_streamlit/__init__.py`.
 - Update the package version.
+- Update the changelog.
 - Remove presious distributions `rm -rf dist build *.egg-info`
 - Build package distribution `tox -e build`
 - Test deployment with `tox -e deploy-test`
