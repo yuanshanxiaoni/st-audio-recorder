@@ -19,4 +19,6 @@ pip install -i https://test.pypi.org/simple/ audio-recorder-streamlit==X.X.X
 # OR
 pip install audio-recorder-streamlit==X.X.X
 streamlit run audio_recorder_streamlit/example.py
+deactivate
+rm -rf test-env
 ```
