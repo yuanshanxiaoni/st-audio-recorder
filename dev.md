@@ -10,18 +10,13 @@ pdm dev
 pdm start
 ```
 
-
-# Release version
-- Build backend
-```shell
-cd audio_recorder_streamlit/frontend
-npm run build
+## Test deployed version
+```sh
+python3 -m venv test-env
+source test-env/bin/activate
+pip install "streamlit >= 0.63" "altair<5"  # for pypi-test only
+pip install -i https://test.pypi.org/simple/ audio-recorder-streamlit==X.X.X
+# OR
+pip install audio-recorder-streamlit==X.X.X
+streamlit run audio_recorder_streamlit/example.py
 ```
-
-- Change `_RELEASE` to `True` in `audio_recorder_streamlit/__init__.py`.
-- Update the package version.
-- Update the changelog.
-- Remove presious distributions `rm -rf dist build *.egg-info`
-- Build package distribution `pdm build`
-- Test deployment with `pdm deploy-test`
-- Deploy package with `pdm deploy`.
