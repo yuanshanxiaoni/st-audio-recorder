@@ -29,7 +29,6 @@ def audio_recorder(
     icon_size: str = "3x",
     sample_rate: Optional[int] = None,
     auto_start: bool = False,
-    invisible: bool = False,
     key: Optional[str] = None,
 ) -> Optional[bytes]:
     """Create a new instance of "audio_recorder".
@@ -62,8 +61,6 @@ def audio_recorder(
         (https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext).
     auto_start: bool
         If True, the recorder will start automatically.
-    invisible: bool
-        If True, the recorder will be invisible.
     key: str or None
         An optional key that uniquely identifies this component. If this is
         None, and the component's arguments are changed, the component will be
@@ -94,7 +91,6 @@ def audio_recorder(
         key=key,
         default=None,
         auto_start=auto_start,
-        invisible=invisible,
     )
     audio_bytes = bytes(json.loads(data)) if data else None
     return audio_bytes

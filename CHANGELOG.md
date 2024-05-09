@@ -1,7 +1,6 @@
 # Changelog
 
 # v0.0.9 (08/05/2024)
-- Added an invisibility mode
 - Added auto start recording
 
 # v0.0.8 (24/01/2023)

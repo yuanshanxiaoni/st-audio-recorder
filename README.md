@@ -49,7 +49,6 @@ You can adjust the button style parameters:
 - **Color**: specify the neutral color and recording color.
 - **Size**: specify the icon size using font awesome sizing
   (https://fontawesome.com/docs/web/style/size).
-- **Invisible**: If `True` the component is invisible.
 
 ```python
 audio_bytes = audio_recorder(
