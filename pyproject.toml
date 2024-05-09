@@ -32,12 +32,17 @@ distribution = true
 
 [tool.pdm.scripts]
 _.env_file = ".env"
-dev-backend = {shell="cd audio_recorder_streamlit/frontend && npm start"}
+npm-build = {shell = "cd audio_recorder_streamlit/frontend && npm run build"}
+python-build = {shell = "python setup.py sdist bdist_wheel"}
+
 dev = {shell="RELEASE= streamlit run audio_recorder_streamlit/example.py"}
-start = {shell = "cd audio_recorder_streamlit/frontend && npm run build && cd ../.. && streamlit run audio_recorder_streamlit/example.py"}
-build = {shell = "cd audio_recorder_streamlit/frontend && npm run build && cd ../.. && rm -rf dist build *.egg-info && python setup.py sdist bdist_wheel"}
-deploy-test = "twine upload --repository testpypi dist/*"
-deploy = "twine upload dist/*"
+dev-backend = {shell="cd audio_recorder_streamlit/frontend && npm start"}
+
+start-component = {shell="streamlit run audio_recorder_streamlit/example.py"}
+start = {composite = ["npm-build", "start-component"]}
+
+deploy-test = {composite= ["npm-build", "pdm publish --username __token__ --password ${PYPI_TEST_IDENTITY} --repository testpypi"]}
+deploy = {composite= ["npm-build", "pdm publish --username __token__ --password ${PYPI_IDENTITY}"]}
 
 [tool.pdm.dev-dependencies]
 dev = [
