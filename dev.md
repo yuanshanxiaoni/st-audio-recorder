@@ -1,15 +1,15 @@
 # Development mode
-**Start backend:**
-```shell
-cd audio_recorder_streamlit/frontend
-npm start
+## Test local dev version
+```sh
+pdm dev-backend
+pdm dev
 ```
 
-**Start frontend:**
-- Set `_RELEASE = False` in `__init__.py` then run
-```shell
-streamlit run audio_recorder_streamlit/__init__.py
+## Test local built version
+```sh
+pdm start
 ```
+
 
 # Release version
 - Build backend

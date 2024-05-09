@@ -33,7 +33,8 @@ distribution = true
 [tool.pdm.scripts]
 _.env_file = ".env"
 dev-backend = {shell="cd audio_recorder_streamlit/frontend && npm start"}
-dev = {shell="RELEASE= streamlit run audio_recorder_streamlit/__init__.py"}
+dev = {shell="RELEASE= streamlit run audio_recorder_streamlit/example.py"}
+start = {shell = "cd audio_recorder_streamlit/frontend && npm run build && cd ../.. && streamlit run audio_recorder_streamlit/example.py"}
 build = {shell = "cd audio_recorder_streamlit/frontend && npm run build && cd ../.. && rm -rf dist build *.egg-info && python setup.py sdist bdist_wheel"}
 deploy-test = "twine upload --repository testpypi dist/*"
 deploy = "twine upload dist/*"
