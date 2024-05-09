@@ -1,26 +1,24 @@
 # Development mode
-**Start backend:**
-```shell
-cd audio_recorder_streamlit/frontend
-npm start
+## Test local dev version
+```sh
+pdm dev-backend
+pdm dev
 ```
 
-**Start frontend:**
-- Set `_RELEASE = False` in `__init__.py` then run
-```shell
-streamlit run audio_recorder_streamlit/__init__.py
+## Test local built version
+```sh
+pdm start
 ```
 
-# Release version
-- Build backend
-```shell
-cd audio_recorder_streamlit/frontend
-npm run build
+## Test deployed version
+```sh
+python3 -m venv test-env
+source test-env/bin/activate
+pip install "streamlit >= 0.63" "altair<5"  # for pypi-test only
+pip install -i https://test.pypi.org/simple/ audio-recorder-streamlit==X.X.X
+# OR
+pip install audio-recorder-streamlit==X.X.X
+streamlit run audio_recorder_streamlit/example.py
+deactivate
+rm -rf test-env
 ```
-
-- Change `_RELEASE` to `True` in `audio_recorder_streamlit/__init__.py`.
-- Update the package version.
-- Remove presious distributions `rm -rf dist build *.egg-info`
-- Build package distribution `tox -e build`
-- Test deployment with `tox -e deploy-test`
-- Deploy package with `tox -e deploy`.

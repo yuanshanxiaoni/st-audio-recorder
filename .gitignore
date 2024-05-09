@@ -6,3 +6,7 @@ build
 *.egg-info
 .tox
 **/__pycache__
+*.code-workspace
+*.lock
+.env
+.pdm-python

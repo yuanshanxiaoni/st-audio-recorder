@@ -32,7 +32,7 @@ You can adjust the recording parameters `energy_threshold` and
     automatically stop the recording.
 - `sample_rate`: Sample rate of the recorded audio. If not provided, this will use the
     default sample rate (https://developer.mozilla.org/en-US/docs/Web/API/AudioContext/AudioContext).
-
+- `auto_start`: If `True` starts the recording as soon as the component has loaded.
 
 ```python
 # The recording will stop automatically
