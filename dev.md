@@ -19,13 +19,12 @@ pdm deploy-test
 
 ## Test deployed version
 ```sh
-python3 -m venv test-env
-source test-env/bin/activate
+pdm venv create --name test-env 3.8
+eval $(pdm venv activate test-env)
 pip install "streamlit >= 0.63" "altair<5"  # for pypi-test only
 pip install -i https://test.pypi.org/simple/ audio-recorder-streamlit==X.X.X
 # OR
 pip install audio-recorder-streamlit==X.X.X
-streamlit run audio_recorder_streamlit/example.py
 deactivate
-rm -rf test-env
+pdm venv remove test-env
 ```
