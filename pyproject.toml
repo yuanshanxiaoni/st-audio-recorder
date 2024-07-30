@@ -7,7 +7,7 @@ packages = ["audio_recorder_streamlit"]
 
 [project]
 name = "audio-recorder-streamlit"
-version = "0.0.9"
+version = "0.0.10"
 authors = [
     {name = "Johan Leduc", email = "johan.leduc90@gmail.com"},
 ]
@@ -15,7 +15,7 @@ description = ""
 readme = "README.md"
 license = {file = "LICENSE"}
 dependencies = [
-    "streamlit >= 0.63,<1.30",
+    "streamlit>=1.12.0",
     "altair<5",
 ]
 requires-python = ">=3.8"
