@@ -62,6 +62,7 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     if (this.props.args["auto_start"]) {
       await this.start()
     }
+    Streamlit.setFrameHeight()
   }
 
   setupMic = async () => {
