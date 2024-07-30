@@ -7,7 +7,7 @@ packages = ["audio_recorder_streamlit"]
 
 [project]
 name = "audio-recorder-streamlit"
-version = "0.0.9"
+version = "0.0.10"
 authors = [
     {name = "Johan Leduc", email = "johan.leduc90@gmail.com"},
 ]

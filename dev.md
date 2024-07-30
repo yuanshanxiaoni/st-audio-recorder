@@ -10,6 +10,13 @@ pdm dev
 pdm start
 ```
 
+## Deploy new version
+Update version in `pyproject.toml` then:
+
+```sh
+pdm deploy-test
+```
+
 ## Test deployed version
 ```sh
 python3 -m venv test-env
