@@ -299,13 +299,23 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     return (
       <span>
         {text} &nbsp;
-        <FontAwesomeIcon
-          // @ts-ignore
-          icon={this.props.args["icon_name"]}
+        <button
+          aria-hidden="false"
+          aria-label="Record"
           onClick={this.onClicked}
-          style={{ color: this.state.color }}
-          size={this.props.args["icon_size"]}
-        />
+          style={{
+            backgroundColor: "transparent",
+            border: "none",
+            cursor: "pointer",
+          }}
+        >
+          <FontAwesomeIcon
+            // @ts-ignore
+            icon={this.props.args["icon_name"]}
+            style={{ color: this.state.color }}
+            size={this.props.args["icon_size"]}
+          />
+        </button>
       </span>
     )
   }
