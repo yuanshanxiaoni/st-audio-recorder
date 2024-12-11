@@ -57,19 +57,56 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     return navigator.mediaDevices.getUserMedia({ audio: true, video: false })
   }
 
+  sleepSec = (ms: number): Promise<void> => {
+      return new Promise(resolve => setTimeout(resolve, ms))
+  }
+
+  checkAudioPermission = async () => {
+    try {
+      const permissionStatus = await navigator.permissions.query({ name: 'microphone' as PermissionName });
+      if (permissionStatus.state === 'granted') {
+        this.startRecording();
+      } else if (permissionStatus.state === 'prompt') {
+        this.requestAudioPermission();
+      } else {
+        console.log('Microphone permission denied');
+      }
+    } catch (error) {
+      console.error('Error checking microphone permission:', error);
+    }
+  }
+
+  requestAudioPermission = async () => {
+    try {
+      const stream = await navigator.mediaDevices.getUserMedia({ audio: true, video: false });
+      this.stream = stream;
+      this.startRecording();
+    } catch (error) {
+      console.error('Error requesting microphone permission:', error);
+    }
+  }
+
   componentDidMount = async () => {
     // Automatically trigger the onClicked function on component mount
     if (this.props.args["auto_start"]) {
       await this.start()
     }
     Streamlit.setFrameHeight()
+
+    // Request mic permission
+    await this.checkAudioPermission();
   }
 
   setupMic = async () => {
     try {
       window.stream = this.stream = await this.getStream()
     } catch (err) {
-      console.log("Error: Issue getting mic", err)
+      console.log("Error: Issue getting mic 1", err)
+      try {
+        window.stream = this.stream = await this.getStream()
+      } catch (err) {
+        console.log("Error: Issue getting mic 2", err)
+      }
     }
 
     this.startRecording()
@@ -129,7 +166,7 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     console.log(`Sample rate ${this.sampleRate}Hz`)
 
     // create buffer states counts
-    let bufferSize = 2048
+    let bufferSize = 1024
     let seconds_per_buffer = bufferSize / this.sampleRate!
     this.pause_buffer_count = Math.ceil(
       this.props.args["pause_threshold"] / seconds_per_buffer
@@ -139,8 +176,9 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
 
     // creates a gain node
     this.volume = this.context.createGain()
+    this.volume.gain.value = 1.5 // Increase the gain value to amplify the input volume
 
-    // creates an audio node from teh microphone incoming stream
+    // creates an audio node from the microphone incoming stream
     this.audioInput = this.context.createMediaStreamSource(this.stream)
 
     // Create analyser
@@ -150,14 +188,12 @@ class AudioRecorder extends StreamlitComponentBase<AudioRecorderState> {
     this.audioInput.connect(this.analyser)
 
     // connect analyser to the volume control
-    // analyser.connect(volume);
+    this.analyser.connect(this.volume)
 
     this.recorder = this.context.createScriptProcessor(bufferSize, 2, 2)
 
     // we connect the volume control to the processor
-    // volume.connect(recorder);
-
-    this.analyser.connect(this.recorder)
+    this.volume.connect(this.recorder)
 
     // finally connect the processor to the output
     this.recorder.connect(this.context.destination)
