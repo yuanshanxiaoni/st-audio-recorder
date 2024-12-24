@@ -7,9 +7,9 @@ packages = ["audio_recorder_streamlit"]
 
 [project]
 name = "audio-recorder-streamlit"
-version = "0.0.11"
+version = "0.0.1"
 authors = [
-    {name = "Johan Leduc", email = "johan.leduc90@gmail.com"},
+    {name = "Xin Zhang", email = "zhainx@gmail.com"},
 ]
 description = ""
 readme = "README.md"
@@ -25,7 +25,7 @@ classifiers = [
 ]
 
 [project.urls]
-Source = "https://github.com/Joooohan/audio-recorder-streamlit"
+Source = "https://github.com/yuanshanxiaoni/audio-recorder-ui-streamlit"
 
 [tool.pdm]
 distribution = true
